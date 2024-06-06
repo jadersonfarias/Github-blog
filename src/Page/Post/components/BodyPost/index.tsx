@@ -2,13 +2,18 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { BodyPostContainer } from "./styles";
 import { GithubDataContext } from "../../../../context/GithubDataContext";
-import { useContext } from "react";
+
+import { useContextSelector } from "use-context-selector";
 
 
 
 
 export function BodyPost() {
-  const { selectedIssue } = useContext(GithubDataContext)
+  const  selectedIssue  = useContextSelector(GithubDataContext, (context) => {
+    return context.selectedIssue
+      
+   
+  })
   
   return (
     <BodyPostContainer>

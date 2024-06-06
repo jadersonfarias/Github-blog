@@ -12,15 +12,18 @@ import {
   HeaderPostLinks,
 } from "./styles";
 import { GithubDataContext } from "../../../../context/GithubDataContext";
-import { useContext } from "react";
+
 
 import {  formatDistanceToNowStrict} from "date-fns";
 import {ptBR} from "date-fns/locale/pt-BR";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
+import { useContextSelector } from "use-context-selector";
 
 export function HeaderPost() {
-  const { selectedIssue } = useContext(GithubDataContext)
+  const  selectedIssue  = useContextSelector(GithubDataContext, (context) => {
+    return context.selectedIssue  
+  })
   const formattedDate = moment(selectedIssue?.created_at).format()
   return (
     <HeaderPostContainer>

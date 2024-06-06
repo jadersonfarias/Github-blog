@@ -1,12 +1,15 @@
-import { useContext } from "react";
+
 import { PostCard } from "./components/PostCard";
 import { Profile } from "./components/Profile";
 import { SearchForm } from "./components/SearchForm";
 import { BlogContainer, BlogPostContainer } from "./styles";
 import { GithubDataContext } from "../../context/GithubDataContext";
+import { useContextSelector } from "use-context-selector";
 
 export function Blog() {
-  const {issuesGitData} = useContext(GithubDataContext)
+  const  issuesGitData  = useContextSelector(GithubDataContext, (context) => {
+    return context.issuesGitData   
+  })
 
 
   return (

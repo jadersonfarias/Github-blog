@@ -20,7 +20,7 @@ interface Profile {
 
 export function Profile() {
   const [profileGitHub, setProfileGitHub] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); // Estado de carregamento
+  //const [loading, setLoading] = useState<boolean>(true); // Estado de carregamento
 
 
   useEffect(() => {
@@ -40,21 +40,13 @@ export function Profile() {
         });
       } catch (error) {
         console.error("Erro ao buscar dados do GitHub:", error);
-      } finally {
-        setLoading(false);
-      } // Define carregamento como falso após a busca
+      }  
 
     } 
     fetchGitHubProfile();
 }, []);
 
-if (loading) {
-  return <span>Loading...</span> // Mostra "Loading..." enquanto os dados estão sendo buscados
-}
 
-if (!profileGitHub) {
-    return  <span>Error loading profile</span> //Mensagem de erro se o perfil não for carregado
-}
 
   return (
     <ProfileContainer>
@@ -65,7 +57,7 @@ if (!profileGitHub) {
         <ProfileInformation>
           <div id="separator">
             <h1>{profileGitHub?.name}</h1>
-            <a href={profileGitHub.html_url} target="blank">
+            <a href={profileGitHub?.html_url} target="blank">
               Github <ArrowSquareOut size={14} weight="bold" />
             </a>
           </div>

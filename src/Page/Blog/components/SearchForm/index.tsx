@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { SearchFormContainer,  Publicity } from "./style";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod'
-import { useContext } from "react";
 import { GithubDataContext } from "../../../../context/GithubDataContext";
+import { useContextSelector } from "use-context-selector";
 
 const searchFormSchema = z.object({
     query: z.string(),
@@ -12,7 +12,10 @@ const searchFormSchema = z.object({
 type searchFormInput = z.infer<typeof searchFormSchema>
 
 export function  SearchForm(){
-  const {fetchIssuesGit} = useContext(GithubDataContext)
+
+ const  fetchIssuesGit  = useContextSelector(GithubDataContext, (context) => {
+    return context.fetchIssuesGit
+  })
 
     const {register,handleSubmit} = useForm<searchFormInput>(
         {
