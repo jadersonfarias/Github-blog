@@ -87,6 +87,15 @@ export const SocialInfo = styled.div`
     gap: 4px;
   }
 
+  span:first-child {
+    svg {
+      background-color: ${(props) => props.theme["base-label"]};
+      border-radius: 50%;
+      color: ${(props) => props.theme["base-profile"]};
+      padding: 0.1rem;
+    }
+  }
+
   svg {
     color: ${(props) => props.theme["base-label"]};
   }

@@ -1,20 +1,59 @@
-import { ArrowSquareOut, CaretLeft } from "@phosphor-icons/react";
-import { HeaderPostContainer, HeaderPostLinks } from "./styles";
-//import { ArrowSquareOut,  CaretLeft, ChatCircle } from "";
+import {
+  ArrowSquareOut,
+  CalendarBlank,
+  CaretLeft,
+  ChatCircle,
+  GithubLogo,
+} from "@phosphor-icons/react";
+import {
+  HeaderPostContainer,
+  HeaderPostContent,
+  HeaderPostInfo,
+  HeaderPostLinks,
+} from "./styles";
+import { GithubDataContext } from "../../../../context/GithubDataContext";
+import { useContext } from "react";
+import {  formatDistanceToNowStrict} from "date-fns";
+import {ptBR} from "date-fns/locale/pt-BR";
+import moment from "moment";
 
-export function HeaderPost(){
-    return(
-        <HeaderPostContainer>
-             <HeaderPostLinks>
-                <a href="">
-                  <CaretLeft size={16} />
-                    voltar
-                </a>
-                <a href="">
-                    Ver no Github 
-                    <ArrowSquareOut size={16} />
-                </a>
-             </HeaderPostLinks>
-        </HeaderPostContainer>
-    )
+export function HeaderPost() {
+  const { selectedIssue } = useContext(GithubDataContext)
+  const formattedDate = moment(selectedIssue?.created_at).format()
+  return (
+    <HeaderPostContainer>
+      <HeaderPostLinks>
+        <a href="">
+          <CaretLeft size={14} />
+          voltar
+        </a>
+        <a href="">
+          Ver no Github
+          <ArrowSquareOut size={14} />
+        </a>
+      </HeaderPostLinks>
+      <HeaderPostContent>
+        <h1>{selectedIssue?.title}</h1>
+        <HeaderPostInfo>
+          <span>
+            <GithubLogo size={22} weight="fill" />
+           {selectedIssue?.user.login}
+          </span>
+          <span>
+            <CalendarBlank size={22} weight="fill" />
+            {formatDistanceToNowStrict(new Date( String(formattedDate)), 
+                        {
+                            addSuffix: true,
+                            locale: ptBR,
+                        })}
+          </span>
+
+          <span>
+                        <ChatCircle weight="bold" size={22} />
+                        {selectedIssue?.comments} comentários
+                    </span>
+        </HeaderPostInfo>
+      </HeaderPostContent>
+    </HeaderPostContainer>
+  );
 }

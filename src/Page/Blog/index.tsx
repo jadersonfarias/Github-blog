@@ -22,6 +22,7 @@ export function Blog() {
                  title={issues.title}
                  body={issues.body}
                  date={issues.created_at}
+                 number={issues.number.toString()}
               />
             )
           })

@@ -2,14 +2,7 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { api } from "../lib/axios";
 
 
-// interface GitCardsProps{
-//      items: IssuesArrayData[];
-//      key: number;
-//      title: string;
-//      body: string;
-//      date?: Date;
-//      total_count: number;
-// }
+
 
 interface IssuesArrayData {
     number: number;
@@ -19,10 +12,23 @@ interface IssuesArrayData {
     created_at: Date;
   }
 
+  
+interface SelectedIssueProps {
+  title: string,
+  user: {
+    login: string;
+  },
+  created_at: Date,
+  comments: number,
+  body:string,
+  html_url: string,
+}
+
 interface GithubDataContextType {
     issuesGitData: IssuesArrayData[]
-
+    selectedIssue?: SelectedIssueProps
     fetchIssuesGit: (query?: string) => Promise<void>
+    IssuesGitSelect: (query?: string | null) =>  Promise<void>
 }
 
 export const GithubDataContext = createContext({} as GithubDataContextType)
@@ -35,7 +41,8 @@ interface TransactionsProviderProps {
 
 export function GithubDataContextProvider({ children }: TransactionsProviderProps){
     const [issuesGitData, setIssuesGitData] = useState<IssuesArrayData[]>([])
-   
+    const [selectedIssue, setSelectedIssue] = useState<SelectedIssueProps>()
+   console.log(selectedIssue)
    
 
     async function fetchIssuesGit(query?: string) {
@@ -57,11 +64,43 @@ export function GithubDataContextProvider({ children }: TransactionsProviderProp
         fetchIssuesGit('')
       }, [])
 
+
+      async function IssuesGitSelect(query?: string | null ) {
+        
+        if (query) {
+
+        try {
+          const response = await api.get(`/repos/jadersonfarias/github-blog/issues/${query}` )
+
+         
+          const issueData: SelectedIssueProps = {
+            title: response.data.title,
+            user: {
+              login: response.data.user.login,
+            },
+            created_at: response.data.created_at,
+            comments: response.data.comments,
+            body: response.data.body,
+            html_url: response.data.html_url,
+           
+          };
+          
+       
+          setSelectedIssue(issueData)
+        } catch (error) {
+            console.error("Error fetching issue details:", error);
+          } 
+            }     
+           
+   }
+
     return(
         <GithubDataContext.Provider value={
             {
               fetchIssuesGit,
               issuesGitData,
+              selectedIssue,
+              IssuesGitSelect,
             }
         }>
          {children}
