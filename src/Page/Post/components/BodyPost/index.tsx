@@ -5,8 +5,11 @@ import { GithubDataContext } from "../../../../context/GithubDataContext";
 import { useContext } from "react";
 
 
+
+
 export function BodyPost() {
   const { selectedIssue } = useContext(GithubDataContext)
+  
   return (
     <BodyPostContainer>
       <ReactMarkdown children={selectedIssue?.body} remarkPlugins={[remarkGfm]} />

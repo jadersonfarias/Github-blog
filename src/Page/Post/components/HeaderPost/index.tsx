@@ -13,9 +13,11 @@ import {
 } from "./styles";
 import { GithubDataContext } from "../../../../context/GithubDataContext";
 import { useContext } from "react";
+
 import {  formatDistanceToNowStrict} from "date-fns";
 import {ptBR} from "date-fns/locale/pt-BR";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
 
 export function HeaderPost() {
   const { selectedIssue } = useContext(GithubDataContext)
@@ -23,11 +25,13 @@ export function HeaderPost() {
   return (
     <HeaderPostContainer>
       <HeaderPostLinks>
-        <a href="">
+        <NavLink to={"/"}>
           <CaretLeft size={14} />
           voltar
-        </a>
-        <a href="">
+
+        </NavLink>
+
+        <a href={selectedIssue?.html_url} target="_blank">
           Ver no Github
           <ArrowSquareOut size={14} />
         </a>

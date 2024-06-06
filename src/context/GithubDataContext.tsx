@@ -42,8 +42,7 @@ interface TransactionsProviderProps {
 export function GithubDataContextProvider({ children }: TransactionsProviderProps){
     const [issuesGitData, setIssuesGitData] = useState<IssuesArrayData[]>([])
     const [selectedIssue, setSelectedIssue] = useState<SelectedIssueProps>()
-   console.log(selectedIssue)
-   
+  
 
     async function fetchIssuesGit(query?: string) {
         const response = await api.get(`/search/issues?q=${query}%20repo:jadersonfarias/Github-blog`)

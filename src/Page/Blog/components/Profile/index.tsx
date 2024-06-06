@@ -65,7 +65,7 @@ if (!profileGitHub) {
         <ProfileInformation>
           <div id="separator">
             <h1>{profileGitHub?.name}</h1>
-            <a href="https://github.com/jadersonfarias">
+            <a href={profileGitHub.html_url} target="blank">
               Github <ArrowSquareOut size={14} weight="bold" />
             </a>
           </div>
