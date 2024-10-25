@@ -1,7 +1,8 @@
 # Github Blog
+![Descrição da Imagem](./src/assets/projeto.png)
 
 ## Visão Geral
-Este é um projeto de blog web que transforma issues de repositórios em postagens envolventes. A plataforma utiliza **React**, **React Router DOM**, **Axios**, **React Markdown**, **Styled Components**, **TypeScript** e a **API do GitHub** para criar uma experiência de blog dinâmica e fluida.
+Este é um projeto de blog web que transforma issues de repositórios em postagens envolventes. A plataforma utiliza **React**, **React Router DOM**, **Axios**, **Styled Components**, **TypeScript** e a **API do GitHub** para criar uma experiência de blog dinâmica e fluida.
 
 ## Funcionalidades
 - **Integração com GitHub**: Busca issues do repositório usando a API do GitHub.
